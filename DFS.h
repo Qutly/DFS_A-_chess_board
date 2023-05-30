@@ -5,7 +5,7 @@
 #include <vector>
 #include <utility>
 #include <set>
-
+#include <map>
 
 std::vector<std::pair<int,int>> findNext(int board[5][5], std::pair<int,int> coordinates) {
     std::vector<std::pair<int, int>> nextCoords;
@@ -37,53 +37,59 @@ std::vector<std::pair<int,int>> findNext(int board[5][5], std::pair<int,int> coo
     return nextCoords;
 }
 
-void DFS(int board[5][5], Stack<std::pair<int, int>>& stack, std::set<std::pair<int, int>> set,std::pair<int, int> start, std::pair<int, int> end) {
-    int i;
-    std::vector<std::pair<int,int>> nextSteps;
-    std::vector<std::pair<int,int>> path;
+
+void DFS(int board[5][5], Stack<std::pair<int, int>>& stack, std::set<std::pair<int, int>>& visited, std::pair<int, int> start, std::pair<int, int> end) {
+    std::map<std::pair<int, int>, std::pair<int, int>> parent;
     stack.push(start);
-    set.insert(start);
+    visited.insert(start);
+    visited.insert(start);
+    parent[start] = start;
+
     while (!stack.isEmpty()) {
-        std::cout << "\n";
-        std::pair<int, int> n = stack.pop();
-        path.push_back(n);
-        std::cout << "Popping" << " [" << n.first << "," << n.second << "]" << "\n";
-        std::cout << "Is" << " [" << n.first << "," << n.second << "]" << " my goal?" << "\n";
-        if(n == end) {
-            std::cout << "[" << n.first << "," << n.second << "] " << "element found" << "\n";
-            std::cout << "Path: ";
-            for(const auto& element : path ) {
-                std::cout << "[" << element.first << "," << element.second << "] ";
+        std::pair<int, int> current = stack.pop();
+        std::cout << "Popping: [" << current.first << "," << current.second << "]\n";
+        if (current == end) {
+            std::vector<std::pair<int, int>> path;
+            std::pair<int, int> node = end;
+            while (node != start) {
+                path.push_back(node);
+                node = parent[node];
             }
-            return;
-        }
-        std::cout << "No" << "\n";
-        nextSteps = findNext(board, n);
-        std::cout << "Next steps: ";
-        for(const auto& element: nextSteps) {
-            std::cout << "[" << element.first << "," << element.second << "] ";
-        }
-        std::cout << "\n";
-        for(i = 0; i < nextSteps.size(); i++) {
-            std::cout << "Evaluating: " << "[" << nextSteps[i].first << "," << nextSteps[i].second << "]" << "\n";
-            auto it = set.find(nextSteps[i]);
-            if(it != set.end()) {
-                std::cout << "["<<it->first << "," << it->second << "]" << " already visited, skip" << "\n";
-                continue;
-            }
-            set.insert(nextSteps[i]);
-            stack.push(nextSteps[i]);
-            std::cout << "Visited nodes: ";
-            for(const auto& element: set) {
-                std::cout << "[" << element.first << "," << element.second << "] ";
+            path.push_back(start);
+
+            std::cout << "Path found: ";
+            for (auto it = path.rbegin(); it != path.rend(); ++it) {
+                std::cout << "[" << it->first << "," << it->second << "] ";
             }
             std::cout << "\n";
-            stack.print();
+            return;
         }
+
+        std::vector<std::pair<int, int>> nextSteps = findNext(board, current);
+        std::cout << "Next steps: ";
+        for (const auto& element: nextSteps) {
+            std::cout << "[" << element.first << "," << element.second << "] ";
+        }
+        for (const auto& next : nextSteps) {
+            std::cout << "\nEvaluating: [" << next.first << "," << next.second << "]";
+            if (visited.find(next) == visited.end()) {
+                stack.push(next);
+                visited.insert(next);
+                parent[next] = current;
+            } else {
+                std::cout << "\n[" << next.first << "," << next.second<< "]" << ",already visited, skip";
+                continue;
+            }
+        }
+        std::cout << "\nVisited nodes: ";
+        for (const auto& visitedNode : visited) {
+            std::cout << "[" << visitedNode.first << "," << visitedNode.second << "] ";
+        }
+        std::cout << "\n";
+        stack.print();
     }
+
+    std::cout << "Path not found\n";
 }
-
-
-
 
 #endif
