@@ -1,5 +1,5 @@
-#ifndef STOS_STOS_H
-#define STOS_STOS_H
+#ifndef STOS_STACK_H
+#define STOS_STACK_H
 #include <iostream>
 #include <string>
 
@@ -20,7 +20,6 @@ public:
     void push(const E& data);
     E pop();
     bool isEmpty() const;
-    std::pair<int,int> peek();
     void print();
 };
 
@@ -55,12 +54,6 @@ template <typename E>
     bool Stack<E>::isEmpty() const {
         return head == nullptr;
     }
-
-template <typename E>
-std::pair<int,int> Stack<E>::peek() {
-    std::pair<int,int> peek = std::make_pair(head->data.first, head->data.second);
-    return peek;
-}
 
 template <typename E>
     void Stack<E>::print () {
