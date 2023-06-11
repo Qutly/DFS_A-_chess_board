@@ -1,4 +1,5 @@
 /snap/clion/237/bin/cmake/linux/x64/bin/cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_MAKE_PROGRAM=/snap/clion/237/bin/ninja/linux/x64/ninja -G Ninja -S /home/maciej/CLionProjects/PAMSI_5_4 -B /home/maciej/CLionProjects/PAMSI_5_4/cmake-build-debug
+-- Found SFML 2.5.1 in /usr/lib/x86_64-linux-gnu/cmake/SFML
 -- Configuring done
 -- Generating done
 -- Build files have been written to: /home/maciej/CLionProjects/PAMSI_5_4/cmake-build-debug

@@ -9,7 +9,7 @@
 					"jsonFile" : "directory-.-Debug-f5ebdc15457944623624.json",
 					"minimumCMakeVersion" : 
 					{
-						"string" : "3.25"
+						"string" : "3.24"
 					},
 					"projectIndex" : 0,
 					"source" : ".",
@@ -39,7 +39,7 @@
 				{
 					"directoryIndex" : 0,
 					"id" : "PAMSI_5_4::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-PAMSI_5_4-Debug-4834767f4553bcd1b98a.json",
+					"jsonFile" : "target-PAMSI_5_4-Debug-159c4e6246742d14223a.json",
 					"name" : "PAMSI_5_4",
 					"projectIndex" : 0
 				}
