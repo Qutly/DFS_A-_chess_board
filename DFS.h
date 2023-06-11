@@ -45,7 +45,18 @@ void DFS(Stack<std::pair<int, int>>& stack, std::set<std::pair<int, int>>& visit
     sf::Text text;
     sf::Texture textureKnight;
     sf::Texture textureRook;
-    sf::Texture textureKing;
+
+    sf::Text textAlgorithmName;
+
+    if(font.loadFromFile("../assets/arial.ttf")) {
+        textAlgorithmName.setFont(font);
+        textAlgorithmName.setFillColor(sf::Color::White);
+        textAlgorithmName.setCharacterSize(35);
+        textAlgorithmName.setString("DFS");
+        textAlgorithmName.setPosition(window.getSize().x / 2.f - textAlgorithmName.getLocalBounds().width / 2.f, 15);
+        window.draw(textAlgorithmName);
+    }
+
     if(textureKnight.loadFromFile("../assets/knight.png")) {
         squares[start.first][start.second].setTexture(&textureKnight);
         window.draw(squares[start.first][start.second]);
@@ -56,10 +67,8 @@ void DFS(Stack<std::pair<int, int>>& stack, std::set<std::pair<int, int>>& visit
         window.draw(squares[0][0]);
     }
 
-    if(textureKing.loadFromFile("../assets/king.png")) {
-        squares[end.first][end.second].setTexture(&textureKing);
-        window.draw(squares[end.first][end.second]);
-    }
+    squares[end.first][end.second].setFillColor(sf::Color::Red);
+    window.draw(squares[end.first][end.second]);
 
     std::map<std::pair<int, int>, std::pair<int, int>> parent;
     stack.push(start);
@@ -70,9 +79,11 @@ void DFS(Stack<std::pair<int, int>>& stack, std::set<std::pair<int, int>>& visit
     while (!stack.isEmpty()) {
         std::pair<int, int> current = stack.pop();
         std::cout << "Popping: [" << current.first << "," << current.second << "]\n";
-        squares[current.first][current.second].setFillColor(sf::Color::Yellow);
-        window.draw(squares[current.first][current.second]);
-        window.display();
+        if(current.first != end.first && current.second != end.second) {
+            squares[current.first][current.second].setFillColor(sf::Color::Yellow);
+            window.draw(squares[current.first][current.second]);
+            window.display();
+        }
 
         if (current == end) {
             isPathFound = true;
@@ -83,7 +94,7 @@ void DFS(Stack<std::pair<int, int>>& stack, std::set<std::pair<int, int>>& visit
         std::cout << "Next steps: ";
         for (const auto& element: nextSteps) {
             std::cout << "[" << element.first << "," << element.second << "] ";
-            if(squares[element.first][element.second].getFillColor() != sf::Color::Yellow) {
+            if(squares[element.first][element.second].getFillColor() != sf::Color::Yellow && element.first != end.first && element.second != end.second)  {
                 squares[element.first][element.second].setFillColor(sf::Color::Blue);
                 window.draw(squares[element.first][element.second]);
                 window.display();
@@ -127,6 +138,7 @@ void DFS(Stack<std::pair<int, int>>& stack, std::set<std::pair<int, int>>& visit
                 text.setFont(font);
                 text.setFillColor(sf::Color::Black);
                 text.setCharacterSize(15);
+                text.setOutlineThickness(0.3);
                 text.setPosition(squares[it->first][it->second].getPosition().x + 8, squares[it->first][it->second].getPosition().y + 6);
 
                 squares[it->first][it->second].setFillColor(sf::Color::Green);

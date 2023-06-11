@@ -31,9 +31,9 @@ int main() {
     std::set<std::pair<int, int>> set;
 
     std::pair<int, int> start = std::make_pair(1,1);
-    std::pair<int, int> end = std::make_pair(14,14);
+    std::pair<int, int> end = std::make_pair(7,7);
 
-    sf::RenderWindow window(sf::VideoMode(600, 600), "Path Finding", sf::Style::Titlebar | sf::Style::Close & ~sf::Style::Resize);
+    sf::RenderWindow window(sf::VideoMode(650, 650), "Path Finding", sf::Style::Titlebar | sf::Style::Close & ~sf::Style::Resize);
 
     sf::VideoMode desktop = sf::VideoMode::getDesktopMode();
 

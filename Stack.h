@@ -1,5 +1,6 @@
-#ifndef STOS_STACK_H
-#define STOS_STACK_H
+#ifndef PAMSI_5_4_STACK_H
+#define PAMSI_5_4_STACK_H
+
 #include <iostream>
 #include <string>
 
