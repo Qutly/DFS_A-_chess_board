@@ -5,21 +5,23 @@
 
 int main() {
     int option;
-    int board [15][15];
+    const int width = 15;
+    const int height = 15;
+    int board [height][width];
 //    = {{1,1,1,1,1},
 //       {1,0,0,0,0},
 //       {1,0,0,0,0},
 //       {1,0,0,0,0},
 //       {1,0,0,0,0}};
-    for (int i = 0; i < 15; i++) {
+    for (int i = 0; i < height; i++) {
         board[i][0] = 1;
     }
-    for (int j = 0; j < 15; j++) {
+    for (int j = 0; j < width; j++) {
         board[0][j] = 1;
     }
 
-    for (int i = 1; i < 15; i++) {
-        for (int j = 1; j < 15; j++) {
+    for (int i = 1; i < height; i++) {
+        for (int j = 1; j < width; j++) {
             board[i][j] = 0;
         }
     }
@@ -31,7 +33,7 @@ int main() {
     std::set<std::pair<int, int>> set;
 
     std::pair<int, int> start = std::make_pair(1,1);
-    std::pair<int, int> end = std::make_pair(7,7);
+    std::pair<int, int> end = std::make_pair(13,10);
 
     sf::RenderWindow window(sf::VideoMode(650, 650), "Path Finding", sf::Style::Titlebar | sf::Style::Close & ~sf::Style::Resize);
 
@@ -44,9 +46,6 @@ int main() {
 
     window.setVerticalSyncEnabled(false);
     window.setFramerateLimit(30);
-
-    const int width = 15;
-    const int height = 15;
 
     sf::RectangleShape squares[height][width];
 

@@ -82,7 +82,6 @@ void DFS(Stack<std::pair<int, int>>& stack, std::set<std::pair<int, int>>& visit
         if(current.first != end.first && current.second != end.second) {
             squares[current.first][current.second].setFillColor(sf::Color::Yellow);
             window.draw(squares[current.first][current.second]);
-            window.display();
         }
 
         if (current == end) {
@@ -97,7 +96,6 @@ void DFS(Stack<std::pair<int, int>>& stack, std::set<std::pair<int, int>>& visit
             if(squares[element.first][element.second].getFillColor() != sf::Color::Yellow && element.first != end.first && element.second != end.second)  {
                 squares[element.first][element.second].setFillColor(sf::Color::Blue);
                 window.draw(squares[element.first][element.second]);
-                window.display();
             }
         }
 
@@ -118,6 +116,7 @@ void DFS(Stack<std::pair<int, int>>& stack, std::set<std::pair<int, int>>& visit
         }
         std::cout << "\n";
         stack.print();
+        window.display();
     }
 
     if (isPathFound) {
